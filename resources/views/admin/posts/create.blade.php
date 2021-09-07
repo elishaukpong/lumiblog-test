@@ -6,17 +6,15 @@
     </x-slot>
 
     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-60">
-        <form method="POST" action="{{ route('admin.tag.store') }}" class="py-16">
+        <form method="POST" action="{{ route('admin.post.store') }}" class="py-16">
         @csrf
 
-        <!-- Email Address -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="title" :value="__('Name')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required autofocus />
             </div>
 
-            <!-- Password -->
             <div class="mt-4">
                 <x-label for="text" :value="__('Text')" />
 
@@ -30,7 +28,7 @@
                     @foreach($tags as $tag)
                     <div class="col-auto">
                         <label>
-                            <input type="checkbox" value="{{$tag->id}}" name="posttag[]" class="form-checkbox">
+                            <input type="checkbox" value="{{$tag->id}}" name="tags_id[]" class="form-checkbox">
                             <span class="ml-2">{{$tag->name}}</span>
                         </label>
                     </div>

@@ -14,4 +14,9 @@ class Tag extends Model
         'name' => 'required | string',
         'description' => 'string'
     ];
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class)->withTimestamps();
+    }
 }

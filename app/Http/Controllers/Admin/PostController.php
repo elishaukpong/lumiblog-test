@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -33,11 +34,21 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $post = Post::create([
+            'title' => $request->title,
+            'text' => $request->text,
+            'user_id' => auth()->id()
+        ]);
+
+        if($request->filled('tags_id')){
+            $post->tags()->sync($request->tags_id);
+        }
+
+        return redirect()->route('admin.post.index')->with('success','Post Created');
     }
 
     /**
