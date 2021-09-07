@@ -16,16 +16,20 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.index')">
-                        Blog
+                    <x-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.blog.index')">
+                        Posts
                     </x-nav-link>
 
                     <x-nav-link :href="route('admin.comment.index')" :active="request()->routeIs('admin.comment.index')">
-                        Comment
+                        Comments
                     </x-nav-link>
 
                     <x-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.*')">
                         Tags
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.*')">
+                        Widgets
                     </x-nav-link>
 
                 </div>
@@ -80,18 +84,17 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.index')">
-                Blogs
+            <x-responsive-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.blog.index')">
+                Posts
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.index')">
+            <x-responsive-nav-link :href="route('admin.comment.index')" :active="request()->routeIs('admin.blog.index')">
                 Comments
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.index')">
+            <x-responsive-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.blog.index')">
                 Tags
             </x-responsive-nav-link>
-
         </div>
 
         <!-- Responsive Settings Options -->
