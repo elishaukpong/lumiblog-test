@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-60">
-        <form method="POST" action="{{ route('admin.post.store') }}" class="py-16">
+        <form method="POST" action="{{ route('admin.post.update', $post->id) }}" class="py-16">
             @method('PUT')
             @csrf
 
@@ -19,8 +19,8 @@
             <div class="mt-4">
                 <x-label for="text" :value="__('Text')" />
 
-                <x-text-area id="text" class="block mt-1 w-full" rows="10"
-                             name="text"  />
+                <textarea name="text" rows="10" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">{{old('text') ?? $post->text}}</textarea>
+
             </div>
 
             <div class="mt-4">
