@@ -30,11 +30,21 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
     public function getPrimaryTagAttribute()
     {
         return $this->tags->first()->name ?? 'Uncategorized';
+    }
+
+    public function getDatePostedAttribute()
+    {
+        return $this->created_at->format('d M Y');
+    }
+
+    public function hasTag(Tag $tag)
+    {
+        return in_array($tag->id,$this->tags->pluck('id')->toArray());
     }
 }

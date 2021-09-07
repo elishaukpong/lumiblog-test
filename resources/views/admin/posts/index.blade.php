@@ -16,12 +16,12 @@
                     <div class="mb-4 sm:mb-0">
                         <div class="space-y-1 text-xs font-semibold tracking-wide uppercase">
                             <a class="transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800" aria-label="Category">{{$post->primaryTag}}</a>
-                            <p class="text-gray-600">{{$post->created_at->format('d M Y')}}</p>
+                            <p class="text-gray-600"> {{$post->datePosted}}</p>
                         </div>
                     </div>
                     <div class="sm:col-span-3 lg:col-span-2">
                         <div class="mb-3">
-                            <a href="/" aria-label="Article" class="inline-block text-black transition-colors duration-200 hover:text-deep-purple-accent-700">
+                            <a href="{{route('admin.post.show',$post->id)}}" aria-label="Article" class="inline-block text-black transition-colors duration-200 hover:text-deep-purple-accent-700">
                                 <p class="text-3xl font-extrabold leading-none sm:text-4xl xl:text-4xl">
                                     {{$post->title}}
                                 </p>
@@ -34,14 +34,7 @@
                 </div>
                 @endforeach
             </div>
-            <div class="text-center">
-                <a href="/" aria-label="" class="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800">
-                    See More
-                    <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
-                        <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z"></path>
-                    </svg>
-                </a>
-            </div>
+            {{$posts->links()}}
         </div>
 
 </x-app-layout>

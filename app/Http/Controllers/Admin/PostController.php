@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.posts.index',['posts' => Post::paginate(20)]);
+        return view('admin.posts.index',['posts' => Post::latest()->simplePaginate(12)]);
     }
 
     /**
@@ -55,11 +55,11 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        return view('admin.posts.show',['post' => Post::findOrfail($id)]);
     }
 
     /**
@@ -70,7 +70,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.posts.edit',['tags' => Tag::all(),'post' => Post::findOrFail($id)]);
     }
 
     /**
