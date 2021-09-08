@@ -7,7 +7,6 @@ use App\Models\Post;
 
 class PostRepository extends BaseRepository implements PostInterface
 {
-    /** @var string */
     protected $order = 'id';
 
     protected $direction = 'desc';

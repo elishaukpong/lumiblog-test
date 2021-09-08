@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contracts\PostInterface;
+use App\Contracts\TagInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
-use App\Models\Post;
-use App\Models\Tag;
 use App\Repository\TagRepository;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -19,10 +17,10 @@ class PostController extends Controller
      */
     protected $tagRepository;
 
-    public function __construct(PostInterface $postRepository, TagRepository $tagRepository)
+    public function __construct(PostInterface $post, TagInterface $tag)
     {
-        $this->postRepository = $postRepository;
-        $this->tagRepository = $tagRepository;
+        $this->postRepository = $post;
+        $this->tagRepository = $tag;
     }
 
     public function index()

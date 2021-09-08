@@ -13,9 +13,9 @@ class TagController extends Controller
 
     protected $tagRepository;
 
-    public function __construct(TagInterface $tagRepository)
+    public function __construct(TagInterface $tag)
     {
-        $this->tagRepository = $tagRepository;
+        $this->tagRepository = $tag;
     }
 
     public function index()
