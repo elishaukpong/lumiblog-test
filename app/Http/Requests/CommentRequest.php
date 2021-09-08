@@ -14,12 +14,15 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        //tweak this
-//        if(! $this->user()->hasRole('Admin')){
-//            return false;
-//        }
-//
-//        return true;
+        //only allow authenticated non-admin users when the
+        // comment is from the normal post show page
+
+        if(($this->routeIs('post.comment') && $this->user())
+            || $this->user()->hasRole('Admin')){
+            return true;
+        }
+
+        return false;
     }
 
     /**

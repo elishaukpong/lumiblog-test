@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    public function dashboardLink()
+    {
+        return $this->hasRole('Admin') ? route('admin.dashboard') : route('dashboard');
+    }
 }

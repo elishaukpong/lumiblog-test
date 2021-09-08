@@ -50,7 +50,11 @@
     @endauth
 
     <div class="max-w-screen-lg sm:mx-auto">
-        @foreach($post->comments as $comment)
+        @php
+        $comments = $post->comments()->paginate(10);
+        @endphp
+
+        @foreach($comments as $comment)
             <div class="flex flex-col items-start py-4 rounded sm:px-4 lg:flex-row sm:hover:translate-x-4 sm:hover:bg-blue-gray-50">
                 <div class="mb-4 lg:mb-0">
                     <h5 class="mb-4 font-bold">
@@ -66,6 +70,8 @@
             </div>
         @endforeach
     </div>
+
+    {{$comments->links()}}
 
 
 </div>
