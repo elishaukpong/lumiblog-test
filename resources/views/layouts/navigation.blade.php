@@ -18,7 +18,7 @@
 
                     @if(auth()->user()->hasRole('Admin'))
 
-                        <x-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.blog.*')">
+                        <x-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.post.*')">
                             Posts
                         </x-nav-link>
 

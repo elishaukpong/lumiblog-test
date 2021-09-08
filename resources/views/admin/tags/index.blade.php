@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-dashboard>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Tags
@@ -28,7 +28,7 @@
                         <x-badge :href="route('admin.tag.edit', $tag->id)"  class="bg-teal-accent-400 text-teal-900 text-center">
                             Update
                         </x-badge>
-                        <x-badge :href="route('admin.tag.create')" class="text-center bg-red-900 text-white">
+                        <x-badge :href="route('admin.tag.create')" class="text-center bg-red-500 text-white">
                             Delete
                         </x-badge>
                     </div>
@@ -41,4 +41,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-dashboard>

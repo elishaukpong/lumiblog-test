@@ -19,7 +19,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        return view('admin.comments.index',['comments' => Comment::paginate(5)]);
+        return view('admin.comments.index',['comments' => Comment::paginate(40)]);
     }
 
     /**
@@ -41,8 +41,8 @@ class CommentController extends Controller
     public function update(CommentRequest $request, $id)
     {
         $comment = Comment::findOrFail($id);
-        $comment->update($request->except(['_method','_token']));
-        return redirect()->route('admin.comment.index')->with('success','Comment Updated Successfully');
+        $comment->update($request->except(['_method','_token', 'url']));
+        return redirect()->to($request->url)->with('success','Comment Updated Successfully');
     }
 
     /**

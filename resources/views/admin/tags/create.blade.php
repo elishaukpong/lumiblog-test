@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-dashboard>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Tags
@@ -31,4 +31,4 @@
             </div>
         </form>
     </div>
-</x-app-layout>
+</x-dashboard>

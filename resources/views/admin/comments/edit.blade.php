@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-dashboard>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Comments
@@ -11,6 +11,7 @@
             @csrf
 
             <input type="hidden" name="post_id" value="{{$comment->post_id}}">
+            <input type="hidden" name="url" value="{{url()->previous()}}">
             <div class="mt-4">
                 <x-label for="text" :value="__('Comment')" />
 
@@ -25,4 +26,4 @@
         </form>
     </div>
 
-</x-app-layout>
+</x-dashboard>
