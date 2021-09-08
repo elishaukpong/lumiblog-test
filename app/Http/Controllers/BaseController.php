@@ -40,7 +40,6 @@ class BaseController extends Controller
         return view($this->createView, $this->params);
     }
 
-
     public function store()
     {
         $entity = $this->interface->create($this->request->except(['_token', '_method']));

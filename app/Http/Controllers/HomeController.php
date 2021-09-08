@@ -3,29 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\PostInterface;
-use App\Models\Post;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
 
-    public function __construct(PostInterface $post)
+    protected $limit = 12;
+    protected $viewIndex = 'welcome';
+    protected $editView = 'admin.posts.edit';
+    protected $createView = 'admin.posts.create';
+    protected $showView = 'posts.show';
+    protected $routeIndex;
+
+    public function __construct(PostInterface $post, Request $request)
     {
-        $this->postRepository = $post;
+        parent::__construct($post,$request);
     }
 
     public function index()
     {
-        return view('welcome',['posts' => $this->postRepository->builder()->limit(3)->get()]);
+        return view($this->viewIndex,['posts' => $this->interface->builder()->limit(3)->get()]);
     }
 
     public function posts()
     {
-        return view('posts.index',['posts' => $this->postRepository->paginate(15)]);
-    }
-
-    public function show($id)
-    {
-        return view('posts.show',['post' => $this->postRepository->findOrFail($id)]);
+        $this->viewIndex = 'posts.index';
+        return parent::index();
     }
 }

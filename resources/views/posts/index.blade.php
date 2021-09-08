@@ -18,11 +18,11 @@
 
     </div>
     <div class="grid max-w-sm gap-5 mb-8 lg:grid-cols-3 sm:mx-auto lg:max-w-full">
-        <x-posts :posts="$posts"/>
+        <x-posts :posts="$entities"/>
     </div>
 
     <div class="my-5">
-        {{$posts->links()}}
+        {{$entities->links()}}
     </div>
 
 </x-app-layout>

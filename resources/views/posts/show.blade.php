@@ -12,22 +12,22 @@
           <rect fill="url(#db164e35-2a0e-4c0f-ab05-f14edc6d4d30)" width="52" height="24"></rect>
         </svg>
       </span>
-            {{$post->title}}
+            {{$entity->title}}
         </h2>
 
         <div class="mb-4 sm:text-center">
             <div>
                 <p aria-label="Author" class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700">
-                    {{$post->author->name}}</p>
+                    {{$entity->author->name}}</p>
                 <p class="text-sm font-medium leading-4 text-gray-600">Author</p>
             </div>
         </div>
         <p class="mb-2 text-xs font-semibold tracking-wide text-gray-600 uppercase sm:text-center">
-            {{$post->datePosted}}
+            {{$entity->datePosted}}
         </p>
 
     </div>
 
-    <x-post-show :post="$post"/>
+    <x-post-show :post="$entity"/>
 
 </x-app-layout>
