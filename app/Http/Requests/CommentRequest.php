@@ -7,6 +7,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CommentRequest extends FormRequest
 {
+    protected $rules = [
+
+    ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -14,15 +18,7 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        //only allow authenticated non-admin users when the
-        // comment is from the normal post show page
-
-        if(($this->routeIs('post.comment') && $this->user())
-            || $this->user()->hasRole('Admin')){
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
@@ -32,6 +28,30 @@ class CommentRequest extends FormRequest
      */
     public function rules()
     {
-        return Comment::rules;
+        $method = $this->method();
+
+        if (null !== $this->get('_method', null)) {
+            $method = $this->get('_method');
+        }
+        $this->offsetUnset('_method');
+
+        switch ($method) {
+            case 'DELETE':
+            case 'GET':
+                $this->rules = [];
+                break;
+
+            case 'POST':
+                $this->rules = Comment::rules;
+                break;
+            case 'PUT':
+            case 'PATCH':
+
+                break;
+            default:
+                break;
+        }
+
+        return $this->rules;
     }
 }

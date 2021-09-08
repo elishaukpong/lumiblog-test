@@ -62,7 +62,7 @@
                     </h5>
 
                     <div class="relative pr-8">
-                        <p class="text-base text-gray-700 md:text-lg">
+                        <p class="text-base text-gray-700">
                             {{$comment->text}}
                         </p>
                     </div>

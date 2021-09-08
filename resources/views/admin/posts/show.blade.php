@@ -1,4 +1,4 @@
-<x-dashboard>
+<x-dashboard-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Posts
@@ -7,9 +7,10 @@
                 Edit
             </x-badge>
 
-            <x-badge :href="route('admin.post.create')" class="bg-red-500 text-white">
+            <x-badge :href="route('admin.post.destroy',$post->id)" class="bg-red-500 text-white delete">
                 Delete
             </x-badge>
+
         </h2>
     </x-slot>
 
@@ -50,4 +51,4 @@
         </div>
     </div>
 
-</x-dashboard>
+</x-dashboard-layout>
