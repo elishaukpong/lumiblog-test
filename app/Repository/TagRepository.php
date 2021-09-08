@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Repository;
+
 use App\Contracts\TagInterface;
 use App\Models\Tag;
 
