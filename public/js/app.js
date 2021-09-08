@@ -4005,6 +4005,8 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./delete-entity */ "./resources/js/delete-entity.js");
+
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 /***/ }),
@@ -4037,6 +4039,26 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/delete-entity.js":
+/*!***************************************!*\
+  !*** ./resources/js/delete-entity.js ***!
+  \***************************************/
+/***/ (() => {
+
+var deleteTargets = document.getElementsByClassName('delete');
+Array.from(deleteTargets).forEach(function (element) {
+  element.addEventListener('click', submitDelete);
+});
+
+function submitDelete(e) {
+  e.preventDefault();
+  var deleteElement = document.getElementById('delete');
+  deleteElement.action = e.target.href;
+  deleteElement.submit();
+}
 
 /***/ }),
 
@@ -21252,6 +21274,19 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/css/sass/custom.scss":
+/*!****************************************!*\
+  !*** ./resources/css/sass/custom.scss ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -21581,7 +21616,8 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.3","/Users/elishaukpong/Docu
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/app": 0,
-/******/ 			"css/app": 0
+/******/ 			"css/app": 0,
+/******/ 			"css/custom": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -21631,8 +21667,9 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.3","/Users/elishaukpong/Docu
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/custom"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/custom"], () => (__webpack_require__("./resources/css/sass/custom.scss")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/custom"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
