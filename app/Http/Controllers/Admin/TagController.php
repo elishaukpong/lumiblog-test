@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Contracts\TagInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TagRequest;
 use App\Models\Tag;
@@ -10,12 +11,25 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
     /**
+     * @var TagInterface
+     */
+    protected $tagRepository;
+
+    public function __construct(TagInterface $tagRepository)
+    {
+        $this->tagRepository = $tagRepository;
+    }
+
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Contracts\View\View
      */
     public function index()
     {
+
+        return $this->tagRepository->get();
         return view('admin.tags.index',['tags' => Tag::paginate(32)]);
     }
 

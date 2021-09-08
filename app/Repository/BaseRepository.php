@@ -2,109 +2,440 @@
 
 namespace App\Repository;
 
-use App\Contract\BaseInterface;
-use App\Contract\Exception;
+use App\Contracts\BaseInterface;
+use App\Contracts\Exception;
+use Illuminate\Container\Container as App;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Shamaseen\Repository\Generator\Utility\Entity;
 
-class BaseRepository implements BaseInterface
+abstract class BaseRepository implements BaseInterface
 {
+    protected $with = [];
 
-    public function insert(array $data = [])
+    /**
+     * @var App
+     */
+    protected $app;
+
+    /** @var string */
+    protected $order = null;
+
+    protected $direction = 'desc';
+
+    /**
+     * @var Model
+     */
+    protected $model;
+
+    /**
+     * @var bool
+     */
+    private $trash = false;
+
+    /**
+     * @var bool
+     */
+    private $withTrash = false;
+
+    /**
+     * @var bool
+     */
+    private $allowCaching = true;
+
+    /**
+     * @var array
+     */
+    private $cache = [];
+
+    /**
+     * @param App $app
+     */
+    public function __construct(App $app)
     {
-        // TODO: Implement insert() method.
+        $this->app = $app;
+        $this->makeModel();
     }
 
-    public function update($entityId, array $data = [])
+    protected function makeModel()
     {
-        // TODO: Implement update() method.
+        $this->model = $this->app->make($this->getModelClass());
     }
 
-    public function delete($entityId)
+    /**
+     * @return string
+     */
+    abstract protected function getModelClass(): string;
+
+    /**
+     * @param int $limit
+     * @param array $criteria
+     *
+     * @return Paginator
+     */
+    public function simplePaginate($limit = 10, $criteria = [])
     {
-        // TODO: Implement delete() method.
+        return $this->filter($criteria)->simplePaginate($limit);
     }
 
-    public function find($entityId, array $columns = ['*'])
+    /**
+     * @return \Illuminate\Database\Query\Builder|Model
+     */
+    public function builder()
     {
-        // TODO: Implement find() method.
+        return $this->model->query();
     }
 
-    public function findOrFail(int $entityId = 0, array $columns = ['*'])
+    /**
+     * @param array $criteria
+     *
+     * @return Builder
+     */
+    public function filter($criteria = [])
     {
-        // TODO: Implement findOrFail() method.
+        $criteria = $this->order($criteria);
+
+        /** @var Model $latest */
+        $latest = $this->model->with($this->with);
+        if ('' != $this->order) {
+            $latest->orderBy($this->order, $this->direction);
+        }
+
+        if (isset($criteria['search'])) {
+            foreach ($this->model->searchable as $method => $columns) {
+                if (method_exists($this->model, $method)) {
+                    $latest->orWhereHas($method, function ($query) use ($criteria, $columns) {
+                        /* @var $query Builder */
+                        $query->where(function ($query2) use ($criteria, $columns) {
+                            /* @var $query2 Builder */
+                            foreach ((array)$columns as $column) {
+                                $query2->orWhere($column, 'like', '%' . $criteria['search'] . '%');
+                            }
+                        });
+                    });
+                } else {
+                    $latest->orWhere($columns, 'like', '%' . $criteria['search'] . '%');
+                }
+            }
+        }
+        unset($criteria['search']);
+
+        if ($this->trash) {
+            $latest->onlyTrashed();
+        }
+        if ($this->withTrash) {
+            $latest->withTrashed();
+        }
+
+        return $latest->where($criteria);
     }
 
-    public function findBy(array $criteria = [], array $columns = ['*'])
+    /**
+     * prepare order for query.
+     *
+     * @param array $criteria
+     *
+     * @return array
+     */
+    private function order($criteria = [])
     {
-        // TODO: Implement findBy() method.
+        if (isset($criteria['order'])) {
+            $this->order = $criteria['order'];
+            unset($criteria['order']);
+        }
+
+        if (isset($criteria['direction'])) {
+            $this->direction = $criteria['direction'];
+            unset($criteria['direction']);
+        }
+        unset($criteria['page']);
+
+        return $criteria;
     }
 
-    public function paginate(int $limit = 10, array $criteria = [])
+    /**
+     * @param int $limit
+     * @param array $criteria
+     *
+     * @return LengthAwarePaginator
+     */
+    public function paginate($limit = 10, $criteria = [])
     {
-        // TODO: Implement paginate() method.
+        return $this->filter($criteria)->paginate($limit);
     }
 
-    public function simplePaginate(int $limit = 10, array $criteria = [])
+    /**
+     * @param array $criteria
+     *
+     * @param array $columns
+     * @return Builder[]|Collection
+     */
+    public function get($criteria = [], $columns = ['*'])
     {
-        // TODO: Implement simplePaginate() method.
+        return $this->filter($criteria)->get($columns);
     }
 
-    public function get(array $criteria = [], array $columns = [])
+    /**
+     * @param $entityId
+     * @param array $attributes
+     *
+     * @return bool|Collection|Model|Model
+     */
+    public function update($entityId = 0, $attributes = [])
     {
-        // TODO: Implement get() method.
+        $item = $this->model->findOrFail($entityId);
+
+        if ($item->update($attributes)) {
+            return $item;
+        }
+
+        return false;
     }
 
-    public function pluck(string $name = 'name', string $entityId = 'id', array $criteria = [])
+    /**
+     * @param $entityId
+     *
+     * @return bool
+     * @throws Exception
+     *
+     */
+    public function delete($entityId = 0)
     {
-        // TODO: Implement pluck() method.
+        $item = $this->model->findOrFail($entityId);
+
+        return $item->delete();
     }
 
-    public function first(array $filter = [], array $columns = ['*'])
+    /**
+     * @param array $attributes
+     *
+     * @return bool
+     */
+    public function insert($attributes = [])
     {
-        // TODO: Implement first() method.
+        return $this->model->insert($attributes);
     }
 
-    public function create(array $data = [])
+    /**
+     * @param string $name
+     * @param string $entityId
+     * @param array $criteria
+     *
+     * @return array
+     */
+    public function pluck($name = 'name', $entityId = 'id', $criteria = [])
     {
-        // TODO: Implement create() method.
+        return $this->filter($criteria)->pluck($name, $entityId)->toArray();
     }
 
-    public function createOrFirst(array $data = [])
+    /**
+     * @param $entityId
+     * @param array $columns
+     *
+     * @return Model|Model
+     */
+    public function find($entityId = 0, $columns = ['*'])
     {
-        // TODO: Implement createOrFirst() method.
+        if ($this->allowCaching) {
+            if (isset($this->cache[$entityId]))
+                return $this->cache[$entityId];
+        }
+
+        $entity = $this->model->with($this->with)->find($entityId, $columns);
+
+        if ($this->allowCaching)
+            $this->cache[$entityId] = $entity;
+
+        return $entity;
     }
 
-    public function createOrUpdate(array $data = [])
+    /**
+     * @param $entityId
+     * @param array $columns
+     *
+     * @return Model|Model
+     * @throws ModelNotFoundException
+     *
+     */
+    public function findOrFail($entityId = 0, $columns = ['*'])
     {
-        // TODO: Implement createOrUpdate() method.
+        if ($this->allowCaching) {
+            if (isset($this->cache[$entityId]))
+                return $this->cache[$entityId];
+        }
+
+        $entity = $this->model->with($this->with)->findOrFail($entityId, $columns);
+
+        if ($this->allowCaching)
+            $this->cache[$entityId] = $entity;
+
+        return $entity;
     }
 
+    /**
+     * @param array $filter
+     * @param array $columns
+     *
+     * @return Model|Model
+     */
+    public function first($filter = [], $columns = ['*'])
+    {
+        if ($this->allowCaching) {
+            if (isset($this->cache['first']))
+                return $this->cache['first'];
+        }
+
+        $entity = $this->filter($filter)->with($this->with)->select($columns)->first();
+
+        if ($this->allowCaching)
+            $this->cache['first'] = $entity;
+
+        return $entity;
+    }
+
+    /**
+     * @param array $filter
+     * @param array $columns
+     *
+     * @return Model|Model
+     */
+    public function last($filter = [], $columns = ['*'])
+    {
+        if ($this->allowCaching) {
+            if (isset($this->cache['last']))
+                return $this->cache['last'];
+        }
+
+        $entity = $this->filter($filter)->with($this->with)->select($columns)->orderBy('id', 'desc')->first();
+
+        if ($this->allowCaching)
+            $this->cache['last'] = $entity;
+
+        return $entity;
+    }
+
+    /**
+     * @param $haystack
+     * @param $needle
+     *
+     * @return Model[]|Model[]|Collection
+     */
+    public function search($haystack, $needle)
+    {
+        return $this->model->where($haystack, 'like', $needle)->get();
+    }
+
+    /**
+     * @param $criteria
+     * @param array $columns
+     *
+     * @return Model|Model
+     */
+    public function findBy($criteria = [], $columns = ['*'])
+    {
+        return $this->model->with($this->with)->select($columns)->where($criteria)->first();
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return Model|Model
+     */
+    public function create($attributes = [])
+    {
+        return $this->model->create($attributes);
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return Model|Model
+     */
+    public function createOrUpdate($attributes = [])
+    {
+        return $this->model->updateOrCreate($attributes);
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Model
+     */
+    public function createOrFirst($data = [])
+    {
+        return $this->model->firstOrCreate($data);
+    }
+
+    /**
+     * Get entity name.
+     *
+     * @return string
+     */
     public function entityName()
     {
-        // TODO: Implement entityName() method.
+        return $this->getModelClass();
+    }
+
+    /**
+     * @param int $entityId
+     *
+     * @return bool
+     */
+    public function restore($entityId = 0)
+    {
+        /** @var Model|null $entity */
+        $entity = $this->model->withTrashed()
+            ->whereId($entityId)
+            ->first();
+        if ($entity) {
+            return $entity->restore() ?? false;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param int $entityId
+     *
+     * @return bool
+     */
+    public function forceDelete($entityId = 0)
+    {
+        /** @var Model|null $entity */
+        $entity = $this->model->withTrashed()
+            ->whereId($entityId)
+            ->first();
+        if ($entity) {
+            return $entity->forceDelete() ?? false;
+        }
+
+        return false;
     }
 
     public function trash()
     {
-        // TODO: Implement trash() method.
+        $this->trash = true;
+        $this->withTrash = false;
     }
 
     public function withTrash()
     {
-        // TODO: Implement withTrash() method.
+        $this->trash = false;
+        $this->withTrash = true;
     }
 
-    public function restore(int $entityId = 0)
+    public function disableCaching()
     {
-        // TODO: Implement restore() method.
+        $this->allowCaching = false;
+        return $this;
     }
 
-    public function forceDelete(int $categoryId = 0)
+    public function allowCaching()
     {
-        // TODO: Implement forceDelete() method.
+        $this->allowCaching = true;
+        return $this;
     }
 }

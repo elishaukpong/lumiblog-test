@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contract;
+namespace App\Contracts;
 
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
