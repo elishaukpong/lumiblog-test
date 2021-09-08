@@ -14,7 +14,12 @@ class CommentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        //tweak this
+//        if(! $this->user()->hasRole('Admin')){
+//            return false;
+//        }
+//
+//        return true;
     }
 
     /**

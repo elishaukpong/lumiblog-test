@@ -14,6 +14,10 @@ class PostRequest extends FormRequest
      */
     public function authorize()
     {
+        if(! $this->user()->hasRole('Admin')){
+            return false;
+        }
+
         return true;
     }
 
