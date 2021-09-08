@@ -25,4 +25,9 @@ class Comment extends Model
     {
         return Str::limit($this->post->title,15);
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class,'user_id');
+    }
 }
