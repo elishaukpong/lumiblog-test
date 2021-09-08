@@ -20,6 +20,7 @@ class BaseController extends Controller
     protected $viewIndex;
     protected $editView;
     protected $createView;
+    protected $showView;
     protected $routeIndex;
     protected $params = [];
 
@@ -31,7 +32,7 @@ class BaseController extends Controller
 
     public function index()
     {
-        return view($this->viewIndex)->with('entities',$this->interface->simplePaginate($this->limit));
+        return view($this->viewIndex)->with('entities',$this->interface->paginate($this->limit));
     }
 
     public function create()
@@ -49,18 +50,18 @@ class BaseController extends Controller
 
     public function edit($id)
     {
-        return view($this->editView,['entity'=> $this->interface->findOrFail($id)]);
+        return view($this->editView,$this->params)
+            ->with('entity',$this->interface->findOrFail($id));
     }
 
     public function show($id)
     {
-
+        return view($this->showView,['entity'=> $this->interface->findOrFail($id)]);
     }
 
     public function update($entityId)
     {
         $entity = $this->interface->update($entityId, $this->request->except(['_token', '_method']));
-
         return $this->makeResponse($entity);
     }
 

@@ -19,24 +19,4 @@ class TagController extends BaseController
         parent::__construct($tag,$request);
         $this->routeIndex = route('admin.tag.index');
     }
-
-//
-//    public function edit($id)
-//    {
-//        return view('admin.tags.edit',['tag' => $this->tagRepository->find($id)]);
-//    }
-//
-//    public function update(Request $request, $id)
-//    {
-//        if(! $this->tagRepository->update($id,$request->all())){
-//            return redirect()->back()->withInput()->with('info','Something went wrong!');
-//        }
-//
-//        return redirect()->route('admin.tag.index')->with('success','Tag Created Successfully');
-//    }
-//
-//    public function destroy($id)
-//    {
-//        //
-//    }
 }

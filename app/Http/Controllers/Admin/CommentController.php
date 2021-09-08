@@ -9,6 +9,7 @@ use App\Http\Requests\CommentRequest;
 
 class CommentController extends BaseController
 {
+    protected $limit = 28;
     protected $viewIndex = 'admin.comments.index';
     protected $editView = 'admin.comments.edit';
     protected $routeIndex;

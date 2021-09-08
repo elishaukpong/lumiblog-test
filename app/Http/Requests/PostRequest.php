@@ -7,6 +7,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PostRequest extends FormRequest
 {
+    protected $rules = [
+
+    ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -14,10 +18,6 @@ class PostRequest extends FormRequest
      */
     public function authorize()
     {
-        if(! $this->user()->hasRole('Admin')){
-            return false;
-        }
-
         return true;
     }
 
@@ -28,6 +28,30 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
-        return Post::rules;
+        $method = $this->method();
+
+        if (null !== $this->get('_method', null)) {
+            $method = $this->get('_method');
+        }
+        $this->offsetUnset('_method');
+
+        switch ($method) {
+            case 'DELETE':
+            case 'GET':
+                $this->rules = [];
+                break;
+
+            case 'POST':
+                $this->rules = Post::rules;
+                break;
+            case 'PUT':
+            case 'PATCH':
+
+                break;
+            default:
+                break;
+        }
+
+        return $this->rules;
     }
 }
