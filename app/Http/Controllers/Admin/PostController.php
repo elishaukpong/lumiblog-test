@@ -93,7 +93,7 @@ class PostController extends Controller
             $post->tags()->sync($request->tags_id);
         }
 
-        return redirect()->route('admin.post.index')->with('success','Post Created');
+        return redirect()->route('admin.post.show',$post->id)->with('success','Post Created');
     }
 
     /**

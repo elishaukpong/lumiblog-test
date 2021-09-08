@@ -9,11 +9,9 @@
         <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     </head>
-
 <body>
 <nav>
     <div class="bg-gray-900">
-
         <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
             <div class="relative flex items-center justify-between">
                 <div class="flex items-center">
@@ -27,7 +25,7 @@
                         <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">LumiForm</span>
                     </a>
                     <ul class="flex items-center hidden space-x-8 lg:flex">
-                        <li><a href="{{route('show.post.all')}}" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Blog</a></li>
+                        <li><a href="/" aria-label="Our product" title="Our product" class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">Blog</a></li>
                     </ul>
                 </div>
                 <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -107,12 +105,8 @@
 </nav>
 
 <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-    <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-        <div>
-            <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-                Brand new
-            </p>
-        </div>
+    <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-40">
+
         <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
       <span class="relative inline-block">
         <svg viewBox="0 0 52 24" fill="currentColor" class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
@@ -123,14 +117,12 @@
           </defs>
           <rect fill="url(#db164e35-2a0e-4c0f-ab05-f14edc6d4d30)" width="52" height="24"></rect>
         </svg>
-        <span class="relative">The</span>
       </span>
-            quick, brown fox jumps over a lazy dog
+            Blog Posts
         </h2>
-        <p class="text-base text-gray-700 md:text-lg">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque rem aperiam, eaque ipsa quae.
-        </p>
+
     </div>
+
     <div class="grid max-w-sm gap-5 mb-8 lg:grid-cols-3 sm:mx-auto lg:max-w-full">
         @foreach($posts as $post)
             <div class="px-10 py-20 text-center border rounded lg:px-5 lg:py-10 xl:py-20">
@@ -155,51 +147,8 @@
         @endforeach
     </div>
 
-    <div class="text-center mt-16">
-        <a href="{{route('show.post.all')}}"
-            class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-        >
-            View More
-        </a>
-    </div>
-</div>
+    {{$posts->links()}}
 
-<div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-    <div class="flex flex-col max-w-screen-lg overflow-hidden bg-white border rounded shadow-sm lg:flex-row sm:mx-auto">
-        <div class="relative lg:w-1/2">
-            <img src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260" alt="" class="object-cover w-full lg:absolute h-80 lg:h-full" />
-            <svg class="absolute top-0 right-0 hidden h-full text-white lg:inline-block" viewBox="0 0 20 104" fill="currentColor">
-                <polygon points="17.3036738 5.68434189e-14 20 5.68434189e-14 20 104 0.824555778 104"></polygon>
-            </svg>
-        </div>
-        <div class="flex flex-col justify-center p-8 bg-white lg:p-16 lg:pl-10 lg:w-1/2">
-            <div>
-                <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
-                    Brand new
-                </p>
-            </div>
-            <h5 class="mb-3 text-3xl font-extrabold leading-none sm:text-4xl">
-                Your new ideal style
-            </h5>
-            <p class="mb-5 text-gray-800">
-                <span class="font-bold">Lorem ipsum</span> dolor sit amet, consectetur adipiscing elit. Etiam sem neque, molestie sit amet venenatis et, dignissim ut erat. Sed aliquet velit id dui eleifend, sed consequat odio sollicitudin.
-            </p>
-            <div class="flex items-center">
-                <button
-                    type="submit"
-                    class="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                >
-                    Get started
-                </button>
-                <a href="/" aria-label="" class="inline-flex items-center font-semibold transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800">
-                    Learn More
-                    <svg class="inline-block w-3 ml-2" fill="currentColor" viewBox="0 0 12 12">
-                        <path d="M9.707,5.293l-5-5A1,1,0,0,0,3.293,1.707L7.586,6,3.293,10.293a1,1,0,1,0,1.414,1.414l5-5A1,1,0,0,0,9.707,5.293Z"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
