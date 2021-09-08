@@ -17,9 +17,11 @@ class BaseController extends Controller
      */
     protected $request;
     protected $limit = 10;
-    protected $viewIndex = '';
-    protected $editView = '';
+    protected $viewIndex;
+    protected $editView;
+    protected $createView;
     protected $routeIndex;
+    protected $params = [];
 
     public function __construct(BaseInterface $interface, Request $request)
     {
@@ -30,6 +32,19 @@ class BaseController extends Controller
     public function index()
     {
         return view($this->viewIndex)->with('entities',$this->interface->simplePaginate($this->limit));
+    }
+
+    public function create()
+    {
+        return view($this->createView, $this->params);
+    }
+
+
+    public function store()
+    {
+        $entity = $this->interface->create($this->request->except(['_token', '_method']));
+
+        return $this->makeResponse($entity);
     }
 
     public function edit($id)

@@ -11,7 +11,7 @@
     <div class="py-12">
         <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div class="grid gap-4 row-gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach($tags as $tag)
+                @foreach($entities as $tag)
                     <div class="flex flex-col justify-between p-5 border rounded shadow-sm">
                     <div>
                         <div class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
@@ -28,7 +28,7 @@
                         <x-badge :href="route('admin.tag.edit', $tag->id)"  class="bg-teal-accent-400 text-teal-900 text-center">
                             Update
                         </x-badge>
-                        <x-badge :href="route('admin.tag.create')" class="text-center bg-red-500 text-white">
+                        <x-badge :href="route('admin.tag.destroy',$tag->id)" class="text-center bg-red-500 text-white delete">
                             Delete
                         </x-badge>
                     </div>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="mt-6">
-                {{$tags->links()}}
+                {{$entities->links()}}
             </div>
         </div>
     </div>

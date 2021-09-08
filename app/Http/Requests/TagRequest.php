@@ -7,6 +7,10 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class TagRequest extends FormRequest
 {
+    protected $rules = [
+
+    ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -14,10 +18,6 @@ class TagRequest extends FormRequest
      */
     public function authorize()
     {
-        if(! $this->user()->hasRole('Admin')){
-            return false;
-        }
-
         return true;
     }
 
@@ -28,6 +28,30 @@ class TagRequest extends FormRequest
      */
     public function rules()
     {
-        return Tag::rules;
+        $method = $this->method();
+
+        if (null !== $this->get('_method', null)) {
+            $method = $this->get('_method');
+        }
+        $this->offsetUnset('_method');
+
+        switch ($method) {
+            case 'DELETE':
+            case 'GET':
+                $this->rules = [];
+                break;
+
+            case 'POST':
+                $this->rules = Tag::rules;
+                break;
+            case 'PUT':
+            case 'PATCH':
+
+                break;
+            default:
+                break;
+        }
+
+        return $this->rules;
     }
 }
