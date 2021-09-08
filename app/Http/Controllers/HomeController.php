@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     public function posts()
     {
-        return view('posts.index',['posts' => Post::paginate(4)]);
+        return view('posts.index',['posts' => Post::paginate(15)]);
     }
 
     public function show($id)

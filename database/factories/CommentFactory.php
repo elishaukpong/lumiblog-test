@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Model;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class TagsFactory extends Factory
+class CommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = Comment::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +24,9 @@ class TagsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'text' => $this->faker->sentence(rand(50,250)),
+            'user_id' => User::role('Admin')->first()->id,
+            'post_id' => Post::inRandomOrder()->first()->id
         ];
     }
 }

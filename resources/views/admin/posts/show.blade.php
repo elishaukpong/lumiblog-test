@@ -40,7 +40,7 @@
 
         <div class="max-w-xl mb-5 md:mx-auto sm:text-center lg:max-w-2xl">
             <hr class="mb-6">
-            <div class="grid grid-cols-3 mx-16">
+            <div class="mx-16">
                 @foreach($post->tags as $tag)
                     <x-badge class="bg-black text-white mx-2">
                         {{$tag->name}}
