@@ -16,11 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.blog.index')">
+                    <x-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.blog.*')">
                         Posts
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.comment.index')" :active="request()->routeIs('admin.comment.index')">
+                    <x-nav-link :href="route('admin.comment.index')" :active="request()->routeIs('admin.comment.*')">
                         Comments
                     </x-nav-link>
 
@@ -28,7 +28,7 @@
                         Tags
                     </x-nav-link>
 
-                    <x-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.*')">
+                    <x-nav-link :href="route('admin.widget.index')" :active="request()->routeIs('admin.widget.*')">
                         Widgets
                     </x-nav-link>
 
@@ -84,16 +84,20 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.blog.index')">
+            <x-responsive-nav-link :href="route('admin.post.index')" :active="request()->routeIs('admin.post.*')">
                 Posts
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.comment.index')" :active="request()->routeIs('admin.blog.index')">
+            <x-responsive-nav-link :href="route('admin.comment.index')" :active="request()->routeIs('admin.comments.*')">
                 Comments
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.blog.index')">
+            <x-responsive-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.*')">
                 Tags
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('admin.widget.index')" :active="request()->routeIs('admin.widget.*')">
+                Widgets
             </x-responsive-nav-link>
         </div>
 

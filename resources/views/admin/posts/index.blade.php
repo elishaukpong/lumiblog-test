@@ -15,7 +15,7 @@
                 <div class="grid py-8 sm:grid-cols-4">
                     <div class="mb-4 sm:mb-0">
                         <div class="space-y-1 text-xs font-semibold tracking-wide uppercase">
-                            <a class="transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800" aria-label="Category">{{$post->primaryTag}}</a>
+                            <a class="transition-colors duration-200 text-deep-purple-accent-400 hover:text-deep-purple-800" aria-label="Category">{{$post->author->name}}</a>
                             <p class="text-gray-600"> {{$post->datePosted}}</p>
                         </div>
                     </div>

@@ -5,33 +5,65 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+{{--    <div class="py-12">--}}
+{{--        <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">--}}
+{{--            @foreach($comments as $comment)--}}
+{{--                <div class="p-8 rounded shadow-xl sm:p-16 my-12">--}}
+{{--                <div class="flex flex-col lg:flex-row">--}}
+{{--                    <div class="mb-6 lg:mb-0 lg:w-1/2 lg:pr-5">--}}
+{{--                        <h2 class="font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">--}}
+{{--                            <span class="inline-block text-deep-purple-accent-400">Post Title:</span> <br class="hidden md:block" />--}}
+{{--                            {{$comment->shortPostTitle}}--}}
+{{--                        </h2>--}}
+{{--                    </div>--}}
+{{--                    <div class="lg:w-1/2">--}}
+{{--                        <p class="mb-4 text-base text-gray-700">--}}
+{{--                           {{$comment->text}}--}}
+{{--                        </p>--}}
+{{--                        <div>--}}
+{{--                            <x-badge :href="route('admin.comment.edit',$comment->id)"  class="bg-teal-accent-400 text-teal-900 text-center">--}}
+{{--                                Update--}}
+{{--                            </x-badge>--}}
+{{--                            <x-badge :href="route('admin.tag.create')" class="text-center bg-red-900 text-white">--}}
+{{--                                Delete--}}
+{{--                            </x-badge>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+{{--    </div>--}}
+
+    <div class="relative px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div class="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             @foreach($comments as $comment)
-                <div class="p-8 rounded shadow-xl sm:p-16 my-12">
-                <div class="flex flex-col lg:flex-row">
-                    <div class="mb-6 lg:mb-0 lg:w-1/2 lg:pr-5">
-                        <h2 class="font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">
-                            <span class="inline-block text-deep-purple-accent-400">Post Title:</span> <br class="hidden md:block" />
-                            {{$comment->shortPostTitle}}
-                        </h2>
-                    </div>
-                    <div class="lg:w-1/2">
-                        <p class="mb-4 text-base text-gray-700">
-                           {{$comment->text}}
-                        </p>
-                        <div>
-                            <x-badge :href="route('admin.comment.edit',$comment->id)"  class="bg-teal-accent-400 text-teal-900 text-center">
-                                Update
-                            </x-badge>
-                            <x-badge :href="route('admin.tag.create')" class="text-center bg-red-900 text-white">
-                                Delete
-                            </x-badge>
-                        </div>
+                <div class="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
+                <div class="p-5">
+                    <p class=" font-bold">{{$comment->post->title}}</p>
+                    <p class="mb-2 text-sm leading-5 text-gray-900">
+                        {{$comment->author->name}}
+                    </p>
+                    <p class="text-sm leading-5 text-gray-900">
+                        {{$comment->text}}
+                    </p>
+
+                    <div class="mt-5">
+                        <x-badge :href="route('admin.comment.edit',$comment->id)"  class="bg-teal-accent-400 text-teal-900 text-center">
+                            Update
+                        </x-badge>
+                        <x-badge  class="text-center bg-red-900 text-white">
+                            Delete
+                        </x-badge>
                     </div>
                 </div>
+                <div class="w-full h-1 ml-auto duration-300 origin-left transform scale-x-0 bg-deep-purple-accent-400 group-hover:scale-x-100"></div>
             </div>
             @endforeach
+        </div>
+
+        <div class="py-10">
+            {{$comments->links()}}
         </div>
     </div>
 </x-app-layout>

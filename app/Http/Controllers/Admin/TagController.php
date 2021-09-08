@@ -16,7 +16,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('admin.tags.index',['tags' => Tag::paginate(15)]);
+        return view('admin.tags.index',['tags' => Tag::paginate(5)]);
     }
 
     /**
@@ -43,17 +43,6 @@ class TagController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -61,7 +50,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.tags.edit',['tag' => Tag::findOrFail($id)]);
     }
 
     /**
@@ -73,7 +62,12 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //todo check if model is dirty
+        $tag = Tag::findOrFail($id);
+
+        $tag->update($request->all());
+
+        return redirect()->route('admin.tag.index')->with('success','Tag Created Successfully');
     }
 
     /**

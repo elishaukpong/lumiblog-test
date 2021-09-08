@@ -138,11 +138,9 @@
                 {{$post->datePosted}}
             </p>
                 <div class="">
-                    @foreach($post->tags()->limit(1)->get() as $tag)
-                        <x-badge class="bg-black text-white mx-2">
-                            {{$tag->name}}
-                        </x-badge>
-                    @endforeach
+                    <x-badge class="bg-black text-white mx-2">
+                        {{$post->author->name}}
+                    </x-badge>
                 </div>
             <p class="inline-block max-w-xs mx-auto mb-3 text-2xl font-extrabold leading-7 transition-colors duration-200 hover:text-deep-purple-accent-400" aria-label="Read article" title="{{$post->shortText}}">
                 {{$post->title}}

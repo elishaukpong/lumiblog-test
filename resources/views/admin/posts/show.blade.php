@@ -23,13 +23,6 @@
                     {{$post->title}}
                 </a>
             </div>
-            <div class="grid grid-cols-3 mx-16">
-                @foreach($post->tags as $tag)
-                    <x-badge class="bg-red-500 text-white mx-2">
-                        {{$tag->name}}
-                    </x-badge>
-                @endforeach
-            </div>
         </div>
         <div class="mb-10 sm:text-center">
             <div>
@@ -43,6 +36,17 @@
             <p class="text-base text-gray-700 text-center ">
                 {!! $post->text !!}
             </p>
+        </div>
+
+        <div class="max-w-xl mb-5 md:mx-auto sm:text-center lg:max-w-2xl">
+            <hr class="mb-6">
+            <div class="grid grid-cols-3 mx-16">
+                @foreach($post->tags as $tag)
+                    <x-badge class="bg-black text-white mx-2">
+                        {{$tag->name}}
+                    </x-badge>
+                @endforeach
+            </div>
         </div>
     </div>
 

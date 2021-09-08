@@ -93,6 +93,8 @@ class PostController extends Controller
             $post->tags()->sync($request->tags_id);
         }
 
+        //todo add sluggable to the project
+
         return redirect()->route('admin.post.show',$post->id)->with('success','Post Created');
     }
 

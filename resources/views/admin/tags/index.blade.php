@@ -25,7 +25,7 @@
                         </p>
                     </div>
                     <div>
-                        <x-badge :href="route('admin.tag.create')"  class="bg-teal-accent-400 text-teal-900 text-center">
+                        <x-badge :href="route('admin.tag.edit', $tag->id)"  class="bg-teal-accent-400 text-teal-900 text-center">
                             Update
                         </x-badge>
                         <x-badge :href="route('admin.tag.create')" class="text-center bg-red-900 text-white">
@@ -34,6 +34,10 @@
                     </div>
                 </div>
                 @endforeach
+            </div>
+
+            <div class="mt-6">
+                {{$tags->links()}}
             </div>
         </div>
     </div>

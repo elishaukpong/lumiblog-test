@@ -20,7 +20,7 @@ class Post extends Model
 
     public function getShortTextAttribute()
     {
-        return Str::limit($this->text,50);
+        return Str::limit($this->text,200);
     }
 
     public function tags()
@@ -35,12 +35,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
-    }
-
-    public function getPrimaryTagAttribute()
-    {
-        return $this->tags->first()->name ?? 'Uncategorized';
+        return $this->hasMany(Comment::class)->latest();
     }
 
     public function getDatePostedAttribute()
