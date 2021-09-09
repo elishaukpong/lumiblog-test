@@ -30,4 +30,11 @@ class HomeController extends BaseController
         $this->viewIndex = 'posts.index';
         return parent::index();
     }
+
+    public function suggest()
+    {
+        return $this->interface->filter($this->request->toArray())
+                                ->latest()->limit(5)->get()
+                                ->toJson();
+    }
 }

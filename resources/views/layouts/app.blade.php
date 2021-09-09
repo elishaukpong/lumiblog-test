@@ -44,38 +44,7 @@
                             type="text"
                             class="flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                         />
-                        <div id="result" class="bg-white p-4 rounded mt-2 text-gray-900 w-2/12">
-{{--                            <ul>--}}
-{{--                                <a href="#">--}}
-{{--                                    <li class="py-2 border-gray-100 border-b-2">--}}
-{{--                                            Hello--}}
-{{--                                    </li>--}}
-{{--                                </a>--}}
-
-{{--                                <a href="#">--}}
-{{--                                    <li class="py-2 border-gray-100 border-b-2">--}}
-{{--                                        Hello--}}
-{{--                                    </li>--}}
-{{--                                </a>--}}
-{{--                                <a href="#">--}}
-{{--                                    <li class="py-2 border-gray-100 border-b-2">--}}
-{{--                                        Hello--}}
-{{--                                    </li>--}}
-{{--                                </a>--}}
-{{--                                <a href="#">--}}
-{{--                                    <li class="py-2 border-gray-100 border-b-2">--}}
-{{--                                        Hello--}}
-{{--                                    </li>--}}
-{{--                                </a>--}}
-{{--                                <a href="#">--}}
-{{--                                    <li class="py-2 border-gray-100 border-b-2">--}}
-{{--                                        Hello--}}
-{{--                                    </li>--}}
-{{--                                </a>--}}
-
-
-{{--                            </ul>--}}
-                        </div>
+                        <div id="result"></div>
                     </li>
 
                     @guest

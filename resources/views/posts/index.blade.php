@@ -13,7 +13,7 @@
           <rect fill="url(#db164e35-2a0e-4c0f-ab05-f14edc6d4d30)" width="52" height="24"></rect>
         </svg>
       </span>
-            Blog Posts
+            Blog Posts @if(request()->has('search')) - Filtered @endif
         </h2>
 
     </div>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="my-5">
-        {{$entities->links()}}
+        {{$entities->appends(request()->input())->links()}}
     </div>
 
 </x-app-layout>

@@ -32,7 +32,7 @@ class BaseController extends Controller
 
     public function index()
     {
-        return view($this->viewIndex)->with('entities',$this->interface->paginate($this->limit));
+        return view($this->viewIndex)->with('entities',$this->interface->paginate($this->limit, $this->request->toArray()));
     }
 
     public function create()

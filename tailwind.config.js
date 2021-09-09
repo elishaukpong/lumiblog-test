@@ -45,6 +45,9 @@ module.exports = {
                     'accent-400': '#1de9b6',
                     'accent-700': '#00bfa5',
                 },
+            },
+            borderWidth:{
+                '1':'.5px'
             }
         },
     },

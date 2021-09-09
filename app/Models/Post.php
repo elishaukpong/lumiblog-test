@@ -16,6 +16,12 @@ class Post extends Model
         'tags_id.*' => 'nullable | exists:tags,id'
     ];
 
+    public $searchable = [
+        'title', 'text'
+    ];
+
+    protected $appends = ['url'];
+
     protected $guarded = [];
 
     public function getShortTextAttribute()
@@ -41,6 +47,11 @@ class Post extends Model
     public function getDatePostedAttribute()
     {
         return $this->created_at->format('d M Y');
+    }
+
+    public function geturlAttribute()
+    {
+        return route('show.post',$this->id);
     }
 
     public function hasTag(Tag $tag)
