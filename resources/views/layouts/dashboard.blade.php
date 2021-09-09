@@ -33,8 +33,9 @@
 
             <!-- Page Content -->
             <main>
-                <!-- Session Status -->
-                <x-auth-session-status class="mb-4" :status="session('status')" />
+                <div class="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+                    <x-auth-session-status class=" text-center py-4 mt-10 bg-green-100 mx-20" :status="session('status')" />
+                </div>
 
                 {{ $slot }}
             </main>

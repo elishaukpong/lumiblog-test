@@ -58,7 +58,9 @@ class Post extends Model
 
     public function geturlAttribute()
     {
-        return route('show.post',$this->id);
+        return auth()->check() && auth()->user()->hasRole('Admin') ?
+                route('admin.post.show',$this->id):
+                    route('show.post',$this->id);
     }
 
     public function hasTag(Tag $tag)
