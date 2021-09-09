@@ -5,7 +5,7 @@ services:
     build:
       context: ./docker
       dockerfile: ./Dockerfile
-    image: mailhunt:latest
+    image: blog:latest
     networks:
       - appnet
     volumes:
@@ -13,14 +13,8 @@ services:
     ports:
       - ${APP_PORT}:80
     working_dir: /var/www/html
-  cache:
-    image: redis:alpine
-    networks:
-      - appnet
-    volumes:
-      - cachedata:/data
   db:
-    image: mysql:5.7
+    image: mysql:latest
     environment:
         MYSQL_ROOT_PASSWORD: secret
         MYSQL_DATABASE: homestead
@@ -36,7 +30,7 @@ services:
     build:
       context: ./docker/node
       dockerfile: ./Dockerfile
-    image: mailhunt/node:latest
+    image: blog/node:latest
     networks:
       - appnet
     volumes:
@@ -50,8 +44,6 @@ networks:
 
 volumes:
   dbdata:
-    driver: local
-  cachedata:
     driver: local
 
 

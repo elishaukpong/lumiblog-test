@@ -72,15 +72,19 @@ class BaseController extends Controller
 
     public function makeResponse($entity)
     {
+        //the notification can be better
+
+        $message = 'Action Not Taken!';
+
         if ($entity) {
-            return redirect()->to($this->routeIndex)->with('success','Action Successful');
+            $message = 'Action Successful';
         }
 
         if (null === $entity) {
-            return redirect()->to($this->routeIndex)->with('warning', 'Something Went Wrong!');
+            $message = 'Something Went Wrong!';
         }
 
-        return redirect()->to($this->routeIndex)->with('info','Action Not Taken!');
+        return redirect()->to($this->routeIndex)->with('status',$message);
     }
 
 }

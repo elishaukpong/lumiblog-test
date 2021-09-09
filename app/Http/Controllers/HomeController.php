@@ -37,4 +37,9 @@ class HomeController extends BaseController
                                 ->latest()->limit(5)->get()
                                 ->toJson();
     }
+
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
 }
