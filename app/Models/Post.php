@@ -44,6 +44,11 @@ class Post extends Model
         return $this->hasMany(Comment::class)->latest();
     }
 
+    public function metas()
+    {
+        return $this->hasMany(Meta::class);
+    }
+
     public function getDatePostedAttribute()
     {
         return $this->created_at->format('d M Y');
