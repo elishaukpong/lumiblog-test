@@ -57,7 +57,7 @@
         @foreach($comments as $comment)
             <div class="flex flex-col items-start py-4 rounded sm:px-4 lg:flex-row sm:hover:translate-x-4 sm:hover:bg-blue-gray-50">
                 <div class="mb-4 lg:mb-0">
-                    <h5 class="mb-4 font-bold">
+                    <h5 class="tooltip-text mb-4 font-bold" data-text="{{$comment->author->name}}, {{$comment->author->dateJoined}}" >
                         {{$comment->author->name}} <span class="text-gray-600">- {{$comment->created_at->diffForHumans()}}</span>
                     </h5>
 

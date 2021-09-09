@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasRole('Admin') ? route('admin.dashboard') : route('dashboard');
     }
+
+    public function getDateJoinedAttribute()
+    {
+        return $this->created_at->format('d M Y');
+    }
 }
