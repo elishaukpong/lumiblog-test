@@ -13,7 +13,9 @@ class Post extends Model
     const rules = [
         'title' => 'required | string',
         'text' => 'required | string',
-        'tags_id.*' => 'nullable | exists:tags,id'
+        'tags_id.*' => 'nullable | exists:tags,id',
+        'meta_name.*' => 'required| string',
+        'meta_content.*' => 'required| string'
     ];
 
     public $searchable = [

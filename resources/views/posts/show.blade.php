@@ -1,4 +1,10 @@
-<x-app-layout>
+<x-app-layout :metas="$entity->metas">
+
+    <x-slot name="meta">
+        @foreach($entity->metas as $meta)
+            <meta name="{{$meta->name}}" content="{{$meta->content}}">
+        @endforeach
+    </x-slot>
 
     <div class="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl">
         <h2 class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">

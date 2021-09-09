@@ -4078,7 +4078,7 @@ document.getElementById('meta-button').addEventListener('click', function (e) {
     return;
   }
 
-  document.getElementById('meta').innerHTML += "\n                            <div class=\"flex my-5 meta-data\">\n                                <input id=\"title\" class=\"rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-2 inline-block mt-1 w-full\" type=\"text\" name=\"meta_title[]\" placeholder=\"Meta Title\" required/>\n                                <input id=\"title\" class=\"rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-2 inline-block mt-1 w-full\" type=\"text\" name=\"meta_desc[]\" placeholder=\"Meta Description\" required />\n                            </div>";
+  document.getElementById('meta').innerHTML += "\n                            <div class=\"flex my-5 meta-data\">\n                                <input id=\"title\" class=\"rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-2 inline-block mt-1 w-full\" type=\"text\" name=\"meta_name[]\" placeholder=\"Meta Title\" required/>\n                                <input id=\"title\" class=\"rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-2 inline-block mt-1 w-full\" type=\"text\" name=\"meta_content[]\" placeholder=\"Meta Description\" required />\n                            </div>";
 });
 
 /***/ }),

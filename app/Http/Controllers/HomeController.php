@@ -22,7 +22,7 @@ class HomeController extends BaseController
 
     public function index()
     {
-        return view($this->viewIndex,['posts' => $this->interface->builder()->limit(3)->get()]);
+        return view($this->viewIndex,['posts' => $this->interface->builder()->latest()->limit(3)->get()]);
     }
 
     public function posts()

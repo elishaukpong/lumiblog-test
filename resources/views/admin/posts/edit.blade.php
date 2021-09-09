@@ -2,6 +2,10 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             Posts
+
+            <x-badge id="meta-button" class="bg-teal-accent-400 text-teal-900">
+                Add Meta Record
+            </x-badge>
         </h2>
     </x-slot>
 
@@ -35,6 +39,17 @@
                         </div>
                     @endforeach
                 </div>
+            </div>
+
+            <hr class="mt-5">
+
+            <div id="meta">
+                @foreach($entity->metas as $meta)
+                    <div class="flex my-5 meta-data">
+                        <input id="title" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-2 inline-block mt-1 w-full" type="text" name="meta_name[]" placeholder="Meta Title" value="{{$meta->name}}" required/>
+                        <input id="title" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mx-2 inline-block mt-1 w-full" type="text" name="meta_content[]" placeholder="Meta Description" value="{{$meta->content}}" required />
+                    </div>
+                @endforeach
             </div>
 
             <div class="flex items-center justify-end mt-4  text-center">

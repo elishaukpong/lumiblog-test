@@ -29,6 +29,15 @@ class PostRepository extends BaseRepository implements PostInterface
             $item->tags()->sync($data['tags_id']);
         }
 
+        if(isset($data['meta_name']) && $item){
+            foreach($data['meta_name'] as $key => $name){
+                $item->metas()->create([
+                    'name' => $name,
+                    'content' => $data['meta_content'][$key]
+                ]);
+            }
+        }
+
         return $item;
     }
 
@@ -41,6 +50,16 @@ class PostRepository extends BaseRepository implements PostInterface
 
         if(isset($data['tags_id']) && $item){
             $item->tags()->sync($data['tags_id']);
+        }
+
+        if(isset($data['meta_name']) && $item){
+            $item->metas()->delete();
+            foreach($data['meta_name'] as $key => $name){
+                $item->metas()->create([
+                    'name' => $name,
+                    'content' => $data['meta_content'][$key]
+                ]);
+            }
         }
 
         return $item;
