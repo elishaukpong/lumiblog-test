@@ -38,7 +38,7 @@
                 </div>
                 <ul class="flex items-center hidden space-x-8 lg:flex">
                     <li>
-                        <input
+                        <input data-search="{{route('show.post.all')}}"
                             placeholder="Search"
                             id="autocomplete"
                             type="text"

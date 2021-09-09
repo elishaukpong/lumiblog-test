@@ -26,6 +26,8 @@
                 </div>
             @endforeach
         </div>
+
+        {{$entities->appends(request()->input())->links()}}
     </div>
 
 </x-dashboard-layout>

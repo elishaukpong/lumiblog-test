@@ -44,6 +44,7 @@
                 <ul class="mr-6">
                     <li>
                         <input
+                            data-search="{{route('admin.post.index')}}"
                             placeholder="Search"
                             id="autocomplete"
                             type="text"

@@ -30,14 +30,17 @@ function respondToKeyUp(e) {
     return;
   }
 
+  var searchUrl = e.target.dataset.search;
+  var suggestUrl = '/suggest?search=' + e.target.value;
+
   if (e.which == 13) {
-    window.location = '/blog?search=' + e.target.value;
+    window.location = "".concat(searchUrl, "?search=").concat(e.target.value);
   }
 
   res.className = "bg-gray-900 p-4 rounded mt-2 text-white w-2/12 fixed";
   res.innerHTML = '';
   var list = '';
-  fetch('/suggest?search=' + e.target.value).then(function (response) {
+  fetch(suggestUrl).then(function (response) {
     return response.json();
   }).then(function (data) {
     Array.from(data).forEach(function (term) {

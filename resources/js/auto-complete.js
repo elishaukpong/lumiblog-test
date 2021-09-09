@@ -34,15 +34,18 @@ function respondToKeyUp(e){
         return;
     }
 
+    let searchUrl = e.target.dataset.search ;
+    let suggestUrl = '/suggest?search=' + e.target.value;
+
     if(e.which == 13){
-        window.location = '/blog?search=' + e.target.value;
+        window.location = `${searchUrl}?search=${e.target.value}`;
     }
 
     res.className="bg-gray-900 p-4 rounded mt-2 text-white w-2/12 fixed";
     res.innerHTML = '';
     let list = '';
 
-    fetch('/suggest?search=' + e.target.value).then(
+    fetch(suggestUrl).then(
         function (response) {
             return response.json();
         }).then(function (data) {
