@@ -52,4 +52,7 @@
         </form>
     </div>
 
+    @push('script')
+        <script src="{{ asset('js/meta-data.js') }}" defer></script>
+    @endpush
 </x-dashboard-layout>

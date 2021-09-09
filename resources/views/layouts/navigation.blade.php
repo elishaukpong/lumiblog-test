@@ -30,10 +30,6 @@
                             Tags
                         </x-nav-link>
 
-                        <x-nav-link :href="route('admin.widget.index')" :active="request()->routeIs('admin.widget.*')">
-                        Widgets
-                        </x-nav-link>
-
                     @endif
 
                 </div>
@@ -48,7 +44,7 @@
                             placeholder="Search"
                             id="autocomplete"
                             type="text"
-                            class="flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                            class="hidden lg:block flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
                         />
                         <div id="result"></div>
                     </li>
@@ -113,10 +109,6 @@
 
                 <x-responsive-nav-link :href="route('admin.tag.index')" :active="request()->routeIs('admin.tag.*')">
                     Tags
-                </x-responsive-nav-link>
-
-                <x-responsive-nav-link :href="route('admin.widget.index')" :active="request()->routeIs('admin.widget.*')">
-                Widgets
                 </x-responsive-nav-link>
             @endif
         </div>

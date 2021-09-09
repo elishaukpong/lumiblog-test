@@ -2,6 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/js/tooltip.js": "/js/tooltip.js",
     "/js/auto-complete.js": "/js/auto-complete.js",
+    "/js/meta-data.js": "/js/meta-data.js",
     "/css/app.css": "/css/app.css",
     "/css/custom.css": "/css/custom.css"
 }
