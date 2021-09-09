@@ -27,7 +27,7 @@
         </div>
         <div class="mb-10 sm:text-center">
             <div>
-                <p aria-label="Author" class="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700">
+                <p data-text="{{$entity->author->name}}, {{$entity->author->dateJoined}}" class="tooltip-text font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700">
                     {{$entity->author->name}}</p>
                 <p class="text-sm font-medium leading-4 text-gray-600">Author</p>
             </div>

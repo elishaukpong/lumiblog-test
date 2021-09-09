@@ -34,7 +34,7 @@ function respondToKeyUp(e) {
     window.location = '/blog?search=' + e.target.value;
   }
 
-  res.className = "bg-gray-900 p-4 rounded mt-2 text-white w-2/12";
+  res.className = "bg-gray-900 p-4 rounded mt-2 text-white w-2/12 fixed";
   res.innerHTML = '';
   var list = '';
   fetch('/suggest?search=' + e.target.value).then(function (response) {

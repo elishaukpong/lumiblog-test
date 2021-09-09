@@ -11,7 +11,7 @@
                 <div class="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl">
                 <div class="p-5">
                     <p class=" font-bold">{{$comment->post->title}}</p>
-                    <p class="mb-2 text-sm leading-5 text-gray-900">
+                    <p class="tooltip-text mb-2 text-sm leading-5 text-gray-900" data-text="{{$comment->author->name}}, {{$comment->author->dateJoined}}">
                         {{$comment->author->name}}
                     </p>
                     <p class="text-sm leading-5 text-gray-900">

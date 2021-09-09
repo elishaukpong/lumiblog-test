@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="auth()->user()->dashboardLink()" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="auth()->user()->dashboardLink()" :active="request()->routeIs('dashboard') || request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
@@ -32,7 +32,7 @@
 
                         <x-nav-link :href="route('admin.widget.index')" :active="request()->routeIs('admin.widget.*')">
                         Widgets
-                    </x-nav-link>
+                        </x-nav-link>
 
                     @endif
 
@@ -41,6 +41,19 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                <ul class="mr-6">
+                    <li>
+                        <input
+                            placeholder="Search"
+                            id="autocomplete"
+                            type="text"
+                            class="flex-grow w-full h-12 px-4 mb-3 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none md:mr-2 md:mb-0 focus:border-deep-purple-accent-400 focus:outline-none focus:shadow-outline"
+                        />
+                        <div id="result"></div>
+                    </li>
+                </ul>
+
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
@@ -84,7 +97,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="auth()->user()->dashboardLink()" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="auth()->user()->dashboardLink()" :active="request()->routeIs('dashboard') || request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
