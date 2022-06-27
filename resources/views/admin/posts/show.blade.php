@@ -11,6 +11,11 @@
                 Delete
             </x-badge>
 
+
+            <x-badge :href="route('admin.path.create')" class="bg-teal-accent-400 text-teal-900">
+                Create A/B Columns
+            </x-badge>
+
         </h2>
     </x-slot>
 
