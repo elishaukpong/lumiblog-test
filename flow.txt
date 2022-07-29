@@ -1,0 +1,10 @@
+//hit the middleware
+//see if route has a/b
+//initiate setup for a/b
+//build the data file - magic method
+//serve
+//send analytics
+
+
+
+//there has to be service helper that will retrieve the details based on a path. getDetails('slot','request()->path());

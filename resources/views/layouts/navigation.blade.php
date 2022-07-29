@@ -30,6 +30,10 @@
                             Tags
                         </x-nav-link>
 
+                        <x-nav-link :href="route('admin.path.index')" :active="request()->routeIs('admin.path.*')">
+                            Path
+                        </x-nav-link>
+
                     @endif
 
                 </div>

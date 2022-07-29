@@ -9,9 +9,14 @@ use App\Models\Url;
 
 class ColumnController extends Controller
 {
-    public function create(Url $path)
+    public function create()
     {
-        return view('admin.columns.create',['path' => $path]);
+        return view('admin.columns.create',['urls' => Url::get()]);
+    }
+
+    public function show($id)
+    {
+        return view('admin.columns.show', ['entity' => Column::findOrFail($id)]);
     }
 
     public function store(ColumnRequest $request)

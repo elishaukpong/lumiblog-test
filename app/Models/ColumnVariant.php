@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ColumnVariant extends Model
 {
     use HasFactory;
+
+    protected $guarded  = [];
 }

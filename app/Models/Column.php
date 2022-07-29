@@ -10,4 +10,9 @@ class Column extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function variants()
+    {
+        return $this->hasMany(ColumnVariant::class);
+    }
 }
