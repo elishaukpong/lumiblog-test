@@ -24,6 +24,7 @@ class VariantCompositionRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|string',
             'composition' => 'required|array',
             'composition.*' => 'required|integer'
         ];

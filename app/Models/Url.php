@@ -15,4 +15,9 @@ class Url extends Model
     {
         return $this->hasMany(Column::class);
     }
+
+    public function compositions()
+    {
+        return $this->hasMany(VariantComposition::class);
+    }
 }

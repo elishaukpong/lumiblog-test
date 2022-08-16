@@ -17,9 +17,19 @@ class VariantCompositionController extends Controller
 
     public function store(VariantCompositionRequest $request, $path)
     {
-        return VariantComposition::create([
+        $data = $request->validated();
+
+        VariantComposition::create([
             'url_id' => $path,
-            'composition' => json_encode($request->validated()['composition'])
+            'name' => $data['name'],
+            'composition' => json_encode($data['composition'])
         ]);
+
+        return redirect()->route('admin.path.show', $path);
+    }
+
+    public function show(Url $path, VariantComposition $composition)
+    {
+        return view('admin.composition.show' ,['path' => $path, 'entity' => $composition]);
     }
 }

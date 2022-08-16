@@ -16,6 +16,7 @@ class CreateVariantCompositionsTable extends Migration
         Schema::create('variant_compositions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('url_id')->index();
+            $table->string('name');
             $table->timestamps();
             $table->json('composition');
         });
