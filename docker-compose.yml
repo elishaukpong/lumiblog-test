@@ -18,7 +18,7 @@ services:
     image: mysql:latest
     environment:
         MYSQL_ROOT_PASSWORD: secret
-        MYSQL_DATABASE: homestead
+        MYSQL_DATABASE: blog
         MYSQL_USER: homestead
         MYSQL_PASSWORD: secret
     networks:

@@ -15,7 +15,7 @@
                 Create Column
             </x-badge>
 
-            <x-badge :href="route('admin.composition.create')" class="bg-teal-accent-400 text-teal-900">
+            <x-badge :href="route('admin.composition.create', $entity->id)" class="bg-teal-accent-400 text-teal-900">
                 Create Composition
             </x-badge>
 
