@@ -10,4 +10,12 @@ Route::get('/blog', [HomeController::class,'posts'])->name('show.post.all');
 Route::get('/suggest', [HomeController::class,'suggest'])->name('suggest');
 Route::get('/dashboard',[HomeController::class,'dashboard'])->middleware(['auth'])->name('dashboard');
 
+Route::get('pricing', function(){
+    return view('sample');
+});
+
 require __DIR__.'/auth.php';
+
+Route::fallback(function(){
+    return 45;
+});

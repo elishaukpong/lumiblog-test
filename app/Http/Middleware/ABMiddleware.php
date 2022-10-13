@@ -2,12 +2,23 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Url;
 use Closure;
+use App\Models\Url;
 use Illuminate\Http\Request;
+use App\Service\CompositionService;
 
 class ABMiddleware
 {
+    /**
+     * @var CompositionService
+     */
+    private $composition;
+
+    public function __construct(CompositionService $compositionService)
+    {
+        $this->composition = $compositionService;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -17,8 +28,16 @@ class ABMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+
+        if($request->isPreflight()){
+            dd($request);
+        }
+
         if(Url::wherepath($request->getRequestUri())->exists()){
-//            return [true];
+            $nextVersion = $this->composition->findNextVersionToShow($request->getRequestUri());
+
+            \View::share('usingABTesting', true);
+            \View::share('nextVersion', $nextVersion);
         }
         return $next($request);
     }

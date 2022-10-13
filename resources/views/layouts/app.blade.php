@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -8,13 +10,33 @@
 
     <title>Laravel</title>
 
+    <script>
+        fetch(window.location.href, {
+            method: 'GET',
+            mode: 'cors',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Headers': 'Accept',
+                'X-Custom-Header': 'preflight',
+            })
+        })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                // handle the error
+            });
+
+    </script>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 
+
+
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/tooltip.js') }}" defer></script>
-    <script src="{{ asset('js/auto-complete.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/tooltip.js') }}"></script>
+    <script src="{{ asset('js/auto-complete.js') }}"></script>
 </head>
 
 </head>
