@@ -11,21 +11,25 @@
     <title>Laravel</title>
 
     <script>
-        fetch(window.location.href, {
-            method: 'GET',
-            mode: 'cors',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Headers': 'Accept',
-                'X-Custom-Header': 'preflight',
+        if(! localStorage.getItem('ab_unique_id')){
+            fetch(window.location.href, {
+                method: 'GET',
+                mode: 'cors',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Headers': 'Accept',
+                    'X-Custom-Header': 'preflight',
+                })
             })
-        })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                // handle the error
-            });
+                .then(response => {
+                    console.log(response)
+
+                    localStorage.setItem('ab_unique_id',45454545);
+                })
+                .catch(error => {
+                    // handle the error
+                });
+        }
 
     </script>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
