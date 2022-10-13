@@ -11,6 +11,31 @@
     <title>Laravel</title>
 
     <script>
+        // updated flow
+        // load the next page sequence
+        // after loading, send a silent request to fingerprint and get identifier,
+        // send identifier to backend to store and hold in session,
+        // use this to decide what to show to the user
+
+        // if session exist, get variant for that session,
+        // if it doesn't exist, boot up the next lineup adn show, then send request and save it up.
+        // Initialize the agent at application startup.
+        const fpPromise = import('https://fpcdn.io/v3/WLqGNZDUDGXO7nd94X4W')
+            .then(FingerprintJS => FingerprintJS.load({
+                region: "eu"
+            }));
+
+        // Get the visitor identifier when you need it.
+        fpPromise
+            .then(fp => fp.get())
+            .then(result => {
+                // This is the visitor identifier:
+                const visitorId = result.visitorId
+                console.log(visitorId)
+            })
+
+
+
         if(! localStorage.getItem('ab_unique_id')){
             fetch(window.location.href, {
                 method: 'GET',
@@ -24,7 +49,7 @@
                 .then(response => {
                     console.log(response)
 
-                    localStorage.setItem('ab_unique_id',45454545);
+                    // localStorage.setItem('ab_unique_id',45454545); //remove at a later time
                 })
                 .catch(error => {
                     // handle the error
