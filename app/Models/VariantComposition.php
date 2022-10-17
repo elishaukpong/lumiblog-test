@@ -11,7 +11,7 @@ class VariantComposition extends Model
 
     protected $guarded = [];
 
-    public function getCompositionAttribute($value)
+    public function getCompositionIdsAttribute($value)
     {
         return json_decode($value);
     }

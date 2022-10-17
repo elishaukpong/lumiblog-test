@@ -20,7 +20,7 @@
                     <select name="composition[{{$column->name}}_id]" class="rounded-md shadow-sm border-gray-300 block mt-1 w-full mb-4" required>
                         <option value="">Select {{ucwords($column->name)}} Variant</option>
                         @foreach($column->variants as $variant)
-                            <option value="{{$variant->id}}" class="">{{$variant->value}}</option>
+                            <option value="{{$variant->id}}_{{$variant->value}}" >{{$variant->value}}</option>
                         @endforeach
                     </select>
                 @endforeach

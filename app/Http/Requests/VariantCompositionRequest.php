@@ -26,7 +26,7 @@ class VariantCompositionRequest extends FormRequest
         return [
             'name' => 'required|string',
             'composition' => 'required|array',
-            'composition.*' => 'required|integer'
+            'composition.*' => 'required|string'
         ];
     }
 }

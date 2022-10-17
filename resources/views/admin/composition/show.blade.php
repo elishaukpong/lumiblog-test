@@ -26,7 +26,7 @@
 
     <div class="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:pt-20">
         <div class="max-w-xl mb-5 md:mx-auto sm:text-center lg:max-w-2xl">
-            @foreach($entity->composition as $key => $composition)
+            @foreach($entity->composition_ids as $key => $composition)
                 <div class="mb-4">
                     <a class="inline-block max-w-lg font-sans text-3xl font-extrabold leading-none tracking-tight text-black transition-colors duration-200 hover:text-deep-purple-accent-700 sm:text-4xl">
                         {{$key}} : {{$composition}}

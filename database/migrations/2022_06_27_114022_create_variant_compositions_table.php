@@ -18,7 +18,8 @@ class CreateVariantCompositionsTable extends Migration
             $table->bigInteger('url_id')->index();
             $table->string('name');
             $table->timestamps();
-            $table->json('composition');
+            $table->json('composition_ids');
+            $table->json('composition_values');
         });
     }
 

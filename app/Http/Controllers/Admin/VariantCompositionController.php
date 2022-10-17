@@ -9,6 +9,9 @@ use App\Models\VariantComposition;
 
 class VariantCompositionController extends Controller
 {
+    const ID = 0;
+    const VALUE = 1;
+
     public function create($path)
     {
         $pathModel = Url::with('columns')->findOrFail($path);
@@ -22,7 +25,8 @@ class VariantCompositionController extends Controller
         VariantComposition::create([
             'url_id' => $path,
             'name' => $data['name'],
-            'composition' => json_encode($data['composition'])
+            'composition_ids' => json_encode($this->prepareCompositionData($data['composition'], self::ID)),
+            'composition_values' => json_encode($this->prepareCompositionData($data['composition'], self::VALUE))
         ]);
 
         return redirect()->route('admin.path.show', $path);
@@ -32,4 +36,11 @@ class VariantCompositionController extends Controller
     {
         return view('admin.composition.show' ,['path' => $path, 'entity' => $composition]);
     }
+
+    private function prepareCompositionData(array $compositions, int $type)
+    {
+        return collect($compositions)
+            ->map(fn($composition) => explode('_',$composition)[$type]);
+    }
+
 }

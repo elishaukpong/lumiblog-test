@@ -27,14 +27,8 @@ class CompositionService
         return new self($uri);
     }
 
-    public function getVersionIdToShow(): int
-    {
-        return 1;
-    }
-
     public function retrieve($value, $fallback = '')
     {
-
         if(! $this->$value){
             return $fallback;
         }
@@ -52,15 +46,15 @@ class CompositionService
         return $this->data[$attribute];
     }
 
-    private function getVersionToShow()
+    private function getVersionToShow(): VariantComposition
     {
-
         if($this->urlRecord->isFirstVisit()) {
             return $this->urlRecord->compositions()->first();
         }
 
         return $this->urlRecord->compositions()
-            ->whereId($this->getVersionIdToShow())
-            ->first();
+            ->where('id','>', $this->urlRecord->last_id)
+            ->first()
+            ?? $this->urlRecord->compositions()->first();
     }
 }
