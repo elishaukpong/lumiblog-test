@@ -3,19 +3,23 @@
 namespace App\Service;
 
 use App\Models\Url;
+use App\Models\VariantComposition;
 
 class CompositionService
 {
 
-    private static $lastId = null;
+    protected string $uri;
+    protected VariantComposition $variant;
     private $data = [];
+    private Url $urlRecord;
 
     private function __construct(string $uri)
     {
-        if(self::$lastId === null) {
-            self::$lastId = Url::first();
-        }
-//      try to use cookies sent from the front end
+        $this->uri = $uri;
+        $this->urlRecord = Url::wherePath($this->uri)->first();
+        $this->variant = $this->getVersionToShow();
+
+        $this->urlRecord->recordLastVisited($this->variant);
     }
 
     public static function initiate(string $uri): self
@@ -23,7 +27,7 @@ class CompositionService
         return new self($uri);
     }
 
-    public function findNextVersionToShow(): int
+    public function getVersionIdToShow(): int
     {
         return 1;
     }
@@ -46,5 +50,17 @@ class CompositionService
         }
 
         return $this->data[$attribute];
+    }
+
+    private function getVersionToShow()
+    {
+
+        if($this->urlRecord->isFirstVisit()) {
+            return $this->urlRecord->compositions()->first();
+        }
+
+        return $this->urlRecord->compositions()
+            ->whereId($this->getVersionIdToShow())
+            ->first();
     }
 }

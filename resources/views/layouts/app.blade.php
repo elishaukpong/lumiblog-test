@@ -18,8 +18,15 @@
         // use this to decide what to show to the user
 
         // if session exist, get variant for that session,
-        // if it doesn't exist, boot up the next lineup adn show, then send request and save it up.
+        // if it doesn't exist, boot up the next lineup and show, then send request and save it up.
         // Initialize the agent at application startup.
+
+
+        //random musing, for new sessions, generate a temp unique id and use,
+        // then replace that id with what fingerprint gives, sweet idea
+        // so first test if session is empty
+
+
         const fpPromise = import('https://fpcdn.io/v3/WLqGNZDUDGXO7nd94X4W')
             .then(FingerprintJS => FingerprintJS.load({
                 region: "eu"

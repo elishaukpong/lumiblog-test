@@ -20,4 +20,16 @@ class Url extends Model
     {
         return $this->hasMany(VariantComposition::class);
     }
+
+    public function isFirstVisit(): bool
+    {
+        return is_null($this->last_id);
+    }
+
+    public function recordLastVisited(VariantComposition $variant): void
+    {
+        $this->update([
+           'last_id' => $variant->id
+        ]);
+    }
 }

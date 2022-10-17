@@ -9,15 +9,6 @@ use App\Service\CompositionService;
 
 class ABMiddleware
 {
-    /**
-     * @var CompositionService
-     */
-    private $composition;
-
-    public function __construct(CompositionService $compositionService)
-    {
-        $this->composition = $compositionService;
-    }
 
     /**
      * Handle an incoming request.
@@ -34,6 +25,7 @@ class ABMiddleware
         }
 
         if(Url::wherepath($request->getRequestUri())->exists()){
+            $compositionService = CompositionService::initiate($request->getRequestUri());
             $nextVersion = $this->composition->findNextVersionToShow($request->getRequestUri());
 
             \View::share('usingABTesting', true);

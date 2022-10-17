@@ -15,8 +15,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(CompositionService::class, fn() => CompositionService::initiate(request()->url()));
-
     }
 
     /**
