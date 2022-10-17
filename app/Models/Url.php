@@ -26,8 +26,12 @@ class Url extends Model
         return is_null($this->last_id);
     }
 
-    public function recordLastVisited(VariantComposition $variant): void
+    public function recordLastVisited(?VariantComposition $variant): void
     {
+        if(is_null($variant)){
+            return;
+        }
+
         $this->update([
            'last_id' => $variant->id
         ]);

@@ -9,7 +9,7 @@ class CompositionService
 {
 
     protected string $uri;
-    protected VariantComposition $variant;
+    protected ?VariantComposition $variant;
     private Url $urlRecord;
 
     private function __construct(string $uri)
@@ -26,16 +26,30 @@ class CompositionService
         return new self($uri);
     }
 
-    private function getVersionToShow(): VariantComposition
+    private function getVersionToShow(): ?VariantComposition
     {
+
         if($this->urlRecord->isFirstVisit()) {
-            return $this->urlRecord->compositions()->first();
+            $variant = $this->urlRecord->compositions()->first();
+
+            $this->setSessionDataFor($variant);
+            return $variant;
         }
 
-        return $this->urlRecord->compositions()
+        if($sessionData = $this->sessionHasPersistedVariant()){
+            return $this->urlRecord->compositions()
+                ->whereId($sessionData['variant_id'])
+                ->first();
+        }
+
+        $variant =  $this->urlRecord->compositions()
             ->where('id','>', $this->urlRecord->last_id)
             ->first()
             ?? $this->urlRecord->compositions()->first();
+
+        $this->setSessionDataFor($variant);
+        return $variant;
+
     }
 
     public function __get($attribute)
@@ -49,14 +63,40 @@ class CompositionService
         return $this->variant->composition_values->$attribute;
     }
 
-    //    public function retrieve($value, $fallback = '')
-//    {
-//        if(! $this->$value){
-//            return $fallback;
-//        }
-//
-//        return $this->$value;
-//
-//    }
+
+    //todo
+    // add logic for how session will be generated and checked for before getting new versions if session is empty, then when fingerprint comes,
+    // you save it to the db with fingerprint
+    /**
+     * @param $variant
+     * @return void
+     */
+    public function setSessionDataFor(?VariantComposition $variant): void
+    {
+        if(is_null($variant)){
+            return;
+        }
+        $composition = collect(request()->session()->get('composition'));
+
+        $composition->add([
+            'token' => request()->session()->get('_token'),
+            'variant_id' => $variant->id,
+            'url_id' => $this->urlRecord->id
+        ]);
+
+        request()->session()->put('composition', $composition->toArray());
+    }
+
+    private function sessionHasPersistedVariant()
+    {
+        if(! request()->session()->has('composition')) {
+            return false;
+        }
+
+        return collect(request()->session()->get('composition'))
+            ->first(fn($composition) => $composition['url_id'] === $this->urlRecord->id);
+    }
 
 }
+
+//todo explore google analytics user_id

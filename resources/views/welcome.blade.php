@@ -19,11 +19,10 @@
         </svg>
         <span class="relative">We</span>
       </span>
-            Offer the best news around the world on all Events, Sports, Tech, Lifestyle and even Wildlife
+            {{$compositionService->body}}
         </h2>
         <p class="text-base text-gray-700 md:text-lg">
-            Join our mailing list or subscribe to RSS to stay upto date, <br>
-            remember knowledge is power.
+            {{$compositionService->head}}
         </p>
     </div>
     <div class="grid max-w-sm gap-5 mb-8 lg:grid-cols-3 sm:mx-auto lg:max-w-full">
@@ -33,7 +32,7 @@
     <div class="text-center mt-16">
         <a href="{{route('show.post.all')}}"
            class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
-            View More
+            {{$compositionService->footer}}
         </a>
     </div>
 </x-app-layout>

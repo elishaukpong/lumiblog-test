@@ -21,6 +21,7 @@ class ABMiddleware
     {
 
         if($request->isPreflight()){
+            //convert sessions to db using fingerprinting or google analytics - which is better
             dd($request);
         }
 

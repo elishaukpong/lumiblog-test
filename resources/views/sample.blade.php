@@ -1,2 +1,2 @@
-{{$nextVersion}}
-{{$usingABTesting}}
+
+{{$compositionService->home}}
