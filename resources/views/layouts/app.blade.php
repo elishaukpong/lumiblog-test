@@ -17,33 +17,23 @@
         // send identifier to backend to store and hold in session,
         // use this to decide what to show to the user
 
-        // if session exist, get variant for that session,
-        // if it doesn't exist, boot up the next lineup and show, then send request and save it up.
-        // Initialize the agent at application startup.
+        if(! localStorage.getItem('visitorId')){
+            const fpPromise = import('https://fpcdn.io/v3/WLqGNZDUDGXO7nd94X4W')
+                .then(FingerprintJS => FingerprintJS.load({
+                    region: "eu"
+                }));
+
+            // Get the visitor identifier when you need it.
+            fpPromise
+                .then(fp => fp.get())
+                .then(result => {
+                    localStorage.setItem('visitorId', result.visitorId);
+                })
+        }
 
 
-        //random musing, for new sessions, generate a temp unique id and use,
-        // then replace that id with what fingerprint gives, sweet idea
-        // so first test if session is empty
+        if(! localStorage.getItem('ab_unique_id')){ //switch this to use cookies and set the cookies to the lifetime of the session on the app - important
 
-
-        const fpPromise = import('https://fpcdn.io/v3/WLqGNZDUDGXO7nd94X4W')
-            .then(FingerprintJS => FingerprintJS.load({
-                region: "eu"
-            }));
-
-        // Get the visitor identifier when you need it.
-        fpPromise
-            .then(fp => fp.get())
-            .then(result => {
-                // This is the visitor identifier:
-                const visitorId = result.visitorId
-                console.log(visitorId)
-            })
-
-
-
-        if(! localStorage.getItem('ab_unique_id')){
             fetch(window.location.href, {
                 method: 'GET',
                 mode: 'cors',
@@ -51,6 +41,7 @@
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Headers': 'Accept',
                     'X-Custom-Header': 'preflight',
+                    'X-Fingerprint': localStorage.getItem('visitorId')
                 })
             })
                 .then(response => {
@@ -72,7 +63,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/tooltip.js') }}"></script>
-    <script src="{{ asset('js/auto-complete.js') }}"></script>
+{{--    <script src="{{ asset('js/auto-complete.js') }}"></script>--}}
 </head>
 
 </head>

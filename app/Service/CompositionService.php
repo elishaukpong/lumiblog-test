@@ -63,10 +63,6 @@ class CompositionService
         return $this->variant->composition_values->$attribute;
     }
 
-
-    //todo
-    // add logic for how session will be generated and checked for before getting new versions if session is empty, then when fingerprint comes,
-    // you save it to the db with fingerprint
     /**
      * @param $variant
      * @return void
