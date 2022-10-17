@@ -15,4 +15,9 @@ class VariantComposition extends Model
     {
         return json_decode($value);
     }
+
+    public function getCompositionValuesAttribute($value)
+    {
+        return json_decode($value);
+    }
 }

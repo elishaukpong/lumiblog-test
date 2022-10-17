@@ -10,7 +10,6 @@ class CompositionService
 
     protected string $uri;
     protected VariantComposition $variant;
-    private $data = [];
     private Url $urlRecord;
 
     private function __construct(string $uri)
@@ -39,8 +38,18 @@ class CompositionService
             ?? $this->urlRecord->compositions()->first();
     }
 
+    public function __get($attribute)
+    {
+        $attribute = "{$attribute}_id";
 
-//    public function retrieve($value, $fallback = '')
+        if(! property_exists($this->variant->composition_values, $attribute)){
+            return false;
+        }
+
+        return $this->variant->composition_values->$attribute;
+    }
+
+    //    public function retrieve($value, $fallback = '')
 //    {
 //        if(! $this->$value){
 //            return $fallback;
@@ -48,15 +57,6 @@ class CompositionService
 //
 //        return $this->$value;
 //
-//    }
-//
-//    public function __get($attribute)
-//    {
-//        if(! array_key_exists($attribute, $this->data)){
-//            return false;
-//        }
-//
-//        return $this->data[$attribute];
 //    }
 
 }
