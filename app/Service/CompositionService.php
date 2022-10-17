@@ -27,25 +27,6 @@ class CompositionService
         return new self($uri);
     }
 
-    public function retrieve($value, $fallback = '')
-    {
-        if(! $this->$value){
-            return $fallback;
-        }
-
-        return $this->$value;
-
-    }
-
-    public function __get($attribute)
-    {
-        if(! array_key_exists($attribute, $this->data)){
-            return false;
-        }
-
-        return $this->data[$attribute];
-    }
-
     private function getVersionToShow(): VariantComposition
     {
         if($this->urlRecord->isFirstVisit()) {
@@ -57,4 +38,25 @@ class CompositionService
             ->first()
             ?? $this->urlRecord->compositions()->first();
     }
+
+
+//    public function retrieve($value, $fallback = '')
+//    {
+//        if(! $this->$value){
+//            return $fallback;
+//        }
+//
+//        return $this->$value;
+//
+//    }
+//
+//    public function __get($attribute)
+//    {
+//        if(! array_key_exists($attribute, $this->data)){
+//            return false;
+//        }
+//
+//        return $this->data[$attribute];
+//    }
+
 }

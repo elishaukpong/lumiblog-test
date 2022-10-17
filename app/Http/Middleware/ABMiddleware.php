@@ -26,10 +26,8 @@ class ABMiddleware
 
         if(Url::wherepath($request->getRequestUri())->exists()){
             $compositionService = CompositionService::initiate($request->getRequestUri());
-            $nextVersion = $this->composition->findNextVersionToShow($request->getRequestUri());
 
-            \View::share('usingABTesting', true);
-            \View::share('nextVersion', $nextVersion);
+            \View::share('compositionService', $compositionService);
         }
         return $next($request);
     }
