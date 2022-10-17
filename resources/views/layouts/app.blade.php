@@ -17,6 +17,10 @@
         // send identifier to backend to store and hold in session,
         // use this to decide what to show to the user
 
+
+        // todo find a way to send visitor id to backend using prefetch and save data from session to db,
+        // todo then a case where there is no session saved, use fingerprint and db to populate session again
+
         if(! localStorage.getItem('visitorId')){
             const fpPromise = import('https://fpcdn.io/v3/WLqGNZDUDGXO7nd94X4W')
                 .then(FingerprintJS => FingerprintJS.load({
