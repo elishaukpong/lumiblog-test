@@ -36,26 +36,31 @@
         }
 
 
-        if(! localStorage.getItem('ab_unique_id')){ //switch this to use cookies and set the cookies to the lifetime of the session on the app - important
+        if(! localStorage.getItem('window.location.href')){ //switch this to use cookies and set the cookies to the lifetime of the session on the app - important
 
-            fetch(window.location.href, {
-                method: 'GET',
-                mode: 'cors',
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Headers': 'Accept',
-                    'X-Custom-Header': 'preflight',
-                    'X-Fingerprint': localStorage.getItem('visitorId')
-                })
-            })
-                .then(response => {
-                    console.log(response)
+            let test = setInterval(function(){
+                if(localStorage.getItem('visitorId')){
+                    fetch(window.location.href, {
+                        method: 'GET',
+                        mode: 'cors',
+                        headers: new Headers({
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Headers': 'Accept',
+                            'X-Custom-Header': 'preflight',
+                            'X-Fingerprint': localStorage.getItem('visitorId')
+                        })
+                    })
+                        .then(response => {
+                            console.log(response)
+                            // localStorage.setItem('ab_unique_id',45454545); //remove at a later time
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        });
 
-                    // localStorage.setItem('ab_unique_id',45454545); //remove at a later time
-                })
-                .catch(error => {
-                    // handle the error
-                });
+                    clearInterval(test)
+                }
+            },500);
         }
 
     </script>
