@@ -3,7 +3,9 @@
 namespace App\Service;
 
 use App\Models\Url;
+use App\Models\UserComposition;
 use App\Models\VariantComposition;
+use Illuminate\Http\Request;
 
 class CompositionService
 {
@@ -24,6 +26,17 @@ class CompositionService
     public static function initiate(string $uri): self
     {
         return new self($uri);
+    }
+
+    public static function persistVariant(Request $request)
+    {
+        ;
+        UserComposition::create([
+            'composition_id' => '',
+            'user_tag' => $request->header('x-fingerprint')
+        ]);
+
+
     }
 
     private function getVersionToShow(): ?VariantComposition

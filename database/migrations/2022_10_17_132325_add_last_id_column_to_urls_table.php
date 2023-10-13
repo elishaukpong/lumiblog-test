@@ -14,7 +14,7 @@ class AddLastIdColumnToUrlsTable extends Migration
     public function up()
     {
         Schema::table('urls', function (Blueprint $table) {
-            $table->unsignedInteger('last_id');
+            $table->unsignedInteger('last_id')->nullable();
         });
     }
 

@@ -36,7 +36,7 @@
         }
 
 
-        if(! localStorage.getItem('window.location.href')){ //switch this to use cookies and set the cookies to the lifetime of the session on the app - important
+        // if(! localStorage.getItem(window.location.href)){ //switch this to use cookies and set the cookies to the lifetime of the session on the app - important
 
             let test = setInterval(function(){
                 if(localStorage.getItem('visitorId')){
@@ -51,8 +51,7 @@
                         })
                     })
                         .then(response => {
-                            console.log(response)
-                            // localStorage.setItem('ab_unique_id',45454545); //remove at a later time
+                            localStorage.setItem(window.location.href,true); //remove at a later time
                         })
                         .catch(error => {
                             console.log(error)
@@ -61,7 +60,7 @@
                     clearInterval(test)
                 }
             },500);
-        }
+        // }
 
     </script>
     <link rel="stylesheet" href="{{asset('css/app.css')}}">

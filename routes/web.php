@@ -14,6 +14,14 @@ Route::get('pricing', function(){
     return view('sample');
 });
 
+Route::get('success-stories', function(){
+    return view('sample');
+});
+
+Route::get('faq', function(){
+    return view('sample');
+});
+
 require __DIR__.'/auth.php';
 
 Route::fallback(function(){

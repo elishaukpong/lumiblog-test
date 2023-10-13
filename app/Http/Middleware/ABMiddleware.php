@@ -21,12 +21,14 @@ class ABMiddleware
     {
 
         if($request->isPreflight()){
-            //convert sessions to db using fingerprinting or google analytics - which is better
-            dd($request);
+            CompositionService::persistVariant($request);
+            \View::share('compositionService', CompositionService::initiate($request->getRequestUri()));
+
+            return $next($request);
         }
 
-        if(Url::wherepath($request->getRequestUri())->exists()){
-            $compositionService = CompositionService::initiate($request->getRequestUri());
+        if(Url::wherepath('faq')->exists()){
+            $compositionService = CompositionService::initiate('faq');
 
             \View::share('compositionService', $compositionService);
         }
